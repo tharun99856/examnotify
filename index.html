@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Exam Tracker</h1>
+        <p>Your one-stop solution to track and manage college entrance exams.</p>
+    </header>
+
+    <div id="course-selection">
+        <label for="course-select">Select Stream:</label>
+        <select id="course-select" onchange="showExamsForStream()">
+            <option value="">Choose a stream</option>
+            <option value="MPC">MPC</option>
+            <option value="BiPC">BiPC</option>
+            <option value="Law">Law</option>
+            <option value="HotelManagement">Hotel Management</option>
+        </select>
+        <input type="text" id="search-box" placeholder="Search for an exam..." oninput="searchExam()">
+    </div>
+
+    <div id="state-exam-popup" style="display: none;">
+        <h2>State-Level Exams</h2>
+        <ul id="state-exam-list"></ul>
+    </div>
+
+    <div id="private-exam-popup" style="display: none;">
+        <h2>Private University Exams</h2>
+        <ul id="private-exam-list"></ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Exam Tracker</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

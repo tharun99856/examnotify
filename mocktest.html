@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="mocktest-container">
+        <h1 id="mock-exam-name"></h1>
+        <ol id="questions-list"></ol>
+        <button id="submit-button" onclick="submitTest()">Submit</button>
+        <div id="result-container"></div>
+    </div>
+
+    <script src="mocktests.js"></script>
+    <link rel="stylesheet" href="styles3.css">
+    <script>
+        function getExamFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("exam");
+        }
+
+        function loadMockTest() {
+            const examName = getExamFromURL();
+            if (examName && mockTests[examName]) {
+                document.getElementById("mock-exam-name").textContent = `${examName} Mock Test`;
+                const questions = mockTests[examName].questions;
+                const list = document.getElementById("questions-list");
+
+                questions.forEach((q, index) => {
+                    const li = document.createElement("li");
+                    li.classList.add("question-item");
+                    li.innerHTML = `
+                        <p>${q.question}</p>
+                        <ul class="options-list">
+                            ${q.options.map((opt, i) => `
+                                <li>
+                                    <label>
+                                        <input type="radio" name="q${index}" value="${opt}" />
+                                        ${opt}
+                                    </label>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    `;
+                    list.appendChild(li);
+                });
+            } else {
+                document.getElementById("mocktest-container").innerHTML = "<p>Mock test not found.</p>";
+            }
+        }
+
+        function submitTest() {
+            const examName = getExamFromURL();
+            const questions = mockTests[examName].questions;
+            let score = 0;
+
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selectedOption && selectedOption.value === q.answer) {
+                    score++;
+                }
+            });
+
+            const resultContainer = document.getElementById("result-container");
+            resultContainer.innerHTML = `You scored ${score} out of ${questions.length}.`;
+        }
+
+        loadMockTest();
+    </script>
+</body>
+</html>

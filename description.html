@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exam Description</title>
+    <link rel="stylesheet" href="description.css">
+</head>
+<body>
+    <div id="description-container">
+        <h1 id="exam-name"></h1>
+        <p><strong>Location:</strong> <span id="exam-location"></span></p>
+        <p><strong>Our Rating:</strong> <span id="exam-rating"></span> ⭐</p>
+
+        <div id="slideshow">
+            <img id="slideshow-img" src="" alt="College Image">
+        </div>
+
+        <div id="user-rating">
+            <label for="userRatingInput">Your Rating:</label>
+            <input type="number" id="userRatingInput" min="1" max="5" step="0.1">
+            <button onclick="submitUserRating()">Submit</button>
+            <p><strong>Average User Rating:</strong> <span id="avgUserRating">-</span> ⭐</p>
+        </div>
+
+        <p id="exam-description"></p>
+
+        <div id="detailed-info">
+            <h3>Fee Structure</h3>
+            <p id="exam-fee"></p>
+
+            <h3>Courses Offered</h3>
+            <ul id="course-list"></ul>
+        </div>
+    </div>
+
+    <script src="descriptions.js"></script>
+    <script>
+        function getExamFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("exam");
+        }
+
+        function loadDescription() {
+            const examName = getExamFromURL();
+            if (examName && descriptions[examName]) {
+                const data = descriptions[examName];
+                document.getElementById("exam-name").textContent = data.name;
+                document.getElementById("exam-location").textContent = data.location;
+                document.getElementById("exam-rating").textContent = data.rating;
+                document.getElementById("exam-description").textContent = data.description;
+
+                if (data.detailedDescription) {
+                    document.getElementById("exam-fee").textContent = data.detailedDescription.fees;
+                    const courseList = document.getElementById("course-list");
+                    courseList.innerHTML = ""; // Clear old items
+                    data.detailedDescription.courses.forEach(course => {
+                        const li = document.createElement("li");
+                        li.textContent = course;
+                        courseList.appendChild(li);
+                    });
+                }
+
+                if (data.images && data.images.length > 0) {
+                    startSlideshow(data.images);
+                }
+
+                loadUserRating(examName);
+            } else {
+                document.getElementById("description-container").innerHTML = "<p>Exam not found.</p>";
+            }
+        }
+
+        function startSlideshow(images) {
+            let index = 0;
+            const imgEl = document.getElementById("slideshow-img");
+            imgEl.src = images[index];
+
+            setInterval(() => {
+                index = (index + 1) % images.length;
+                imgEl.src = images[index];
+            }, 3000);
+        }
+
+        function submitUserRating() {
+            const exam = getExamFromURL();
+            const rating = parseFloat(document.getElementById("userRatingInput").value);
+            if (rating >= 1 && rating <= 5) {
+                let ratings = JSON.parse(localStorage.getItem(`${exam}-userRatings`) || "[]");
+                ratings.push(rating);
+                localStorage.setItem(`${exam}-userRatings`, JSON.stringify(ratings));
+                loadUserRating(exam);
+                alert("Thanks for rating!");
+            } else {
+                alert("Enter a rating between 1 and 5");
+            }
+        }
+
+        function loadUserRating(exam) {
+            let ratings = JSON.parse(localStorage.getItem(`${exam}-userRatings`) || "[]");
+            if (ratings.length > 0) {
+                const sum = ratings.reduce((a, b) => a + b, 0);
+                const avg = (sum / ratings.length).toFixed(2);
+                document.getElementById("avgUserRating").textContent = avg;
+            } else {
+                document.getElementById("avgUserRating").textContent = "No ratings yet";
+            }
+        }
+
+        loadDescription();
+    </script>
+</body>
+</html>

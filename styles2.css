@@ -1,0 +1,93 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+    padding: 50px;
+}
+
+/* Header Styling */
+h1 {
+    color: #2a3d66;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Logo Styling */
+#logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: grayscale(70%) sepia(50%);
+}
+
+/* Form Styling */
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Input and Select Styling */
+label {
+    font-size: 1.1em;
+    color: #2a3d66;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+input[type="text"], input[type="email"], input[type="password"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+input[type="checkbox"] {
+    margin: 10px 0;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Links Styling */
+p {
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
