@@ -18,3 +18,7 @@ This document describes the architecture and API design for the project.
 ## Deployment
 
 See `.env.example` for required environment variables.
+
+## Update – July 28, 2025
+
+Minor documentation improvements applied in iteration 2.
