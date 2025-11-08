@@ -22,3 +22,7 @@ See `.env.example` for required environment variables.
 ## Update – July 28, 2025
 
 Minor documentation improvements applied in iteration 2.
+
+## Update – November 08, 2025
+
+Minor documentation improvements applied in iteration 6.
