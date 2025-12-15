@@ -25,3 +25,5 @@ def fetch_config(key: str, default: Optional[str] = None) -> Optional[str]:
     """Safely fetch configuration value by key."""
     import os
     return os.environ.get(key, default)
+
+# Refactor pass 8 — 2025-12-15
