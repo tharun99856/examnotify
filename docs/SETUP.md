@@ -34,3 +34,7 @@ Minor documentation improvements applied in iteration 10.
 ## Update – February 22, 2026
 
 Minor documentation improvements applied in iteration 11.
+
+## Update – March 28, 2026
+
+Minor documentation improvements applied in iteration 12.
